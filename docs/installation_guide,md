@@ -1,0 +1,116 @@
+# 🔌 Installation Guide – IoT Home Automation and Security System
+
+This guide walks you through the hardware setup, wiring structure, power management, and firmware installation for your ESP32 + Arduino Mega–based smart home automation and security system.
+
+---
+
+## 🧱 System Overview
+
+- **ESP32** handles the local web interface, appliance control, sensor monitoring, and wireless communication.
+- **Arduino Mega** handles access control (RFID + keypad) and communicates with the ESP32 using NRF24L01 transceivers.
+- Both boards are powered independently via **9V batteries regulated by buck converters**.
+
+---
+
+## 🔧 Hardware Installation
+
+### 1. Power Supply Setup
+
+- Connect each **9V battery** to a **buck converter**.
+  - Set buck output: **5V for relays and sensors**, **3.3V for NRF24L01**
+- Use **capacitor filtering** (e.g., 10µF – 100µF electrolytic) on **NRF24L01 power line** to prevent brownouts.
+
+> ⚠️ Ensure common ground between ESP32, relay module, and sensor modules.
+
+---
+
+### 2. ESP32 Unit – Web Server & Automation Node
+
+**Modules connected**:
+- DHT11 (temperature/humidity)
+- Rain sensor
+- PIR motion sensor
+- Flame sensor
+- 2-channel relay module
+- NRF24L01 (SPI)
+  
+**Functions**:
+- Hosts Wi-Fi dashboard (connects to existing router)
+- Controls relays for connected appliances
+- Reads sensor data and updates interface
+- Receives wireless access control status from Mega
+
+---
+
+### 3. Arduino Mega Unit – Access Control Node
+
+**Modules connected**:
+- MFRC522 RFID reader (SPI)
+- 4x4 Matrix keypad
+- NRF24L01 (SPI)
+- Relay or signal pin for door unlock trigger
+
+**Functions**:
+- Reads RFID tags and verifies PIN
+- Sends access status (`GRANTED`/`DENIED`) to ESP32
+- Activates lock relay if access is granted
+
+---
+
+## 📡 Wireless Communication
+
+- Both ESP32 and Arduino Mega communicate **via NRF24L01 modules**
+- Shared protocol:
+  - Messages sent from Mega → ESP32:
+    - `"ACCESS:GRANTED"`  
+    - `"ACCESS:DENIED"`
+  - Messages sent from ESP32 → Mega (if used): control or status commands
+
+> ⚠️ Ensure unique addresses are assigned to each radio node.
+
+---
+
+## 💻 Firmware Upload
+
+### 1. Flash ESP32
+
+- Open `central_control.ino` in Arduino IDE
+- Select board: `ESP32 Dev Module`
+- Connect via USB
+- Flash the sketch
+
+### 2. Flash Arduino Mega
+
+- Open `access_control.ino`
+- Select board: `Arduino Mega or Mega 2560`
+- Flash via USB
+
+---
+
+## 🌐 Web Interface Access
+
+1. Power on the ESP32 and wait for it to connect to your existing Wi-Fi.
+2. Use the Serial Monitor (9600 baud) to find its assigned IP address.
+3. Open the IP in a browser to access the control dashboard.
+4. Login with the default credentials (editable in code).
+
+---
+
+## ✅ Final Checklist
+
+- [ ] Power rails stable with regulated voltage (3.3V/5V)
+- [ ] NRF24L01 modules show communication (check serial debug)
+- [ ] Sensors respond as expected (motion, flame, rain, DHT11)
+- [ ] Relay modules switch loads without noise or reset
+- [ ] Access control workflow triggers proper actions
+- [ ] Web interface is responsive and secure
+
+---
+
+## 📦 Notes
+
+- Optional: Add ON/OFF switches on battery lines
+- Optional: Use heat shrink and enclosures for safety
+- Optional: Add status LEDs for access control and sensor states
+
+---
