@@ -1,0 +1,23 @@
+Smart home adoption is growing rapidly.
+
+This project presents an IoT-based home automation and security system.
+
+It uses two boards: ESP32 and Arduino Mega.
+
+The ESP32 hosts a local web server with secure login.
+
+Users can control devices via relays through a web interface.
+
+It reads data from four sensors: DHT11, rain, PIR, and flame.
+
+The system shows real-time environment status and reacts to motion/fire.
+
+ESP32 communicates wirelessly with Arduino Mega via nRF24L01.
+
+Arduino Mega handles access control via keypad and RFID.
+
+The setup ensures only authorized access and remote control.
+
+The system is modular, scalable, and reliable.
+
+Ideal for automating and securing modern homes.
