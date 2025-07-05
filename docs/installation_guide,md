@@ -1,10 +1,10 @@
-# 🔌 Installation Guide – IoT Home Automation and Security System
+# Installation Guide – IoT Home Automation and Security System
 
 This guide walks you through the hardware setup, wiring structure, power management, and firmware installation for your ESP32 + Arduino Mega–based smart home automation and security system.
 
 ---
 
-## 🧱 System Overview
+## System Overview
 
 - **ESP32** handles the local web interface, appliance control, sensor monitoring, and wireless communication.
 - **Arduino Mega** handles access control (RFID + keypad) and communicates with the ESP32 using NRF24L01 transceivers.
@@ -12,7 +12,7 @@ This guide walks you through the hardware setup, wiring structure, power managem
 
 ---
 
-## 🔧 Hardware Installation
+## Hardware Installation
 
 ### 1. Power Supply Setup
 
@@ -20,7 +20,7 @@ This guide walks you through the hardware setup, wiring structure, power managem
   - Set buck output: **5V for relays and sensors**, **3.3V for NRF24L01**
 - Use **capacitor filtering** (e.g., 10µF – 100µF electrolytic) on **NRF24L01 power line** to prevent brownouts.
 
-> ⚠️ Ensure common ground between ESP32, relay module, and sensor modules.
+> Ensure common ground between ESP32, relay module, and sensor modules.
 
 ---
 
@@ -57,7 +57,7 @@ This guide walks you through the hardware setup, wiring structure, power managem
 
 ---
 
-## 📡 Wireless Communication
+## Wireless Communication
 
 - Both ESP32 and Arduino Mega communicate **via NRF24L01 modules**
 - Shared protocol:
@@ -66,11 +66,11 @@ This guide walks you through the hardware setup, wiring structure, power managem
     - `"ACCESS:DENIED"`
   - Messages sent from ESP32 → Mega (if used): control or status commands
 
-> ⚠️ Ensure unique addresses are assigned to each radio node.
+> Ensure unique addresses are assigned to each radio node.
 
 ---
 
-## 💻 Firmware Upload
+## Firmware Upload
 
 ### 1. Flash ESP32
 
@@ -87,7 +87,7 @@ This guide walks you through the hardware setup, wiring structure, power managem
 
 ---
 
-## 🌐 Web Interface Access
+## Web Interface Access
 
 1. Power on the ESP32 and wait for it to connect to your existing Wi-Fi.
 2. Use the Serial Monitor (9600 baud) to find its assigned IP address.
@@ -96,7 +96,7 @@ This guide walks you through the hardware setup, wiring structure, power managem
 
 ---
 
-## ✅ Final Checklist
+## Final Checklist
 
 - [ ] Power rails stable with regulated voltage (3.3V/5V)
 - [ ] NRF24L01 modules show communication (check serial debug)
@@ -107,7 +107,7 @@ This guide walks you through the hardware setup, wiring structure, power managem
 
 ---
 
-## 📦 Notes
+## Notes
 
 - Optional: Add ON/OFF switches on battery lines
 - Optional: Use heat shrink and enclosures for safety
